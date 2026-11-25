@@ -1,26 +1,31 @@
-# My App
+# Centinela · Seguridad con IA (Frontend Angular M3)
 
-An app built with [Builder.io](https://www.builder.io) on the
-[Agent-Native](https://agent-native.com?utm_source=github&utm_medium=referral&utm_content=fusion-starter-readme) framework. Replace this paragraph with
-what the app does and who it's for.
+Frontend del sistema de videovigilancia y detección de violencia mediante Inteligencia Artificial, desarrollado con **Angular 19 (Standalone Components)**, **Lazy Loading**, **Formularios Reactivos** y **Material Design 3 (M3)** siguiendo la línea gráfica **Centinela Control Room** (`--m3-primary: #1854ca`, `--m3-surface: #fef7ff`, `--m3-low: #f7f2fa`).
 
-## Develop locally
+## Arquitectura del Proyecto
 
-```bash
-cp .env.example .env
-corepack enable
-pnpm install
-pnpm dev
+```text
+src/app/
+├── core/
+│   ├── models/database.models.ts          # Interfaces TypeScript 1:1 con las 11 tablas SQL
+│   ├── services/centinela-data.service.ts # Estado reactivo con Signals y Mock Data
+│   └── layout/main-layout.component.ts    # Shell M3 (Sidebar + Topbar + Modal de Términos)
+├── shared/
+│   └── components/incident-review-modal/  # Modal de revisión de incidente, evidencia y protocolo
+├── features/
+│   ├── auth/login.component.ts            # Login y selector rápido de operadores (users)
+│   ├── monitoring/                        # Centro de Monitoreo en vivo (cámaras, sirenas, métricas)
+│   ├── incidents/                         # Historial de incidentes, filtros, evidencia y correo
+│   ├── infrastructure/                    # CRUD de Cámaras, Sirenas y Zonas
+│   ├── alerts-config/                     # Categorías IA (umbrales), Protocolos, Contactos y Envíos
+│   └── users-terms/                       # CRUD de Usuarios, Versiones de Términos y Aceptaciones
+├── app.routes.ts
+└── app.config.ts
 ```
 
-`.env.example` sets `AUTH_DISABLED=true` as a commented-out option; uncomment it
-to skip sign-in while developing.
+## Ejecución en Desarrollo
 
-## Project layout
-
-- `app/`: routes and UI components
-- `actions/`: operations shared by the UI and the app's agent
-- `server/`: server plugins and the database client
-- `drizzle/`: schema and migrations; start with `drizzle/START_HERE.md`
-
-Framework docs: [agent-native.com/docs](https://agent-native.com/docs?utm_source=github&utm_medium=referral&utm_content=fusion-starter-readme).
+```bash
+npm install
+npm start
+```
